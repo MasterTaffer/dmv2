@@ -104,8 +104,7 @@ void blockFormsToImage(int w, int h, in BlockForm[] forms, ref ubyte[] buf)
 
 int main(string[] args)
 {
-	import std.algorithm.iteration;
-	import std.algorithm.searching;
+	import std.algorithm;
 	import std.file;
 
 	auto printUsage = { writeln("Usage: dmv2 outputfile imagefolder"); };
@@ -118,8 +117,27 @@ int main(string[] args)
 	auto ifolder = args[2];
 
 	
-	auto inputFrames = dirEntries(ifolder, SpanMode.shallow)
-		.filter!(f => f.name.endsWith(".png"));
+	bool nameCompare (string a, string b)
+	{
+		import std.path;
+		import std.string;
+		auto an = baseName(a);
+		auto bn = baseName(b);
+		if (isNumeric(an) && isNumeric(bn))
+		{
+			import std.conv;
+			int u = parse!int(an);
+			int v = parse!int(bn);
+			return u < v;
+		}
+		return a < b;
+		
+	}
+	import std.array;
+	auto inputFrames = array(dirEntries(ifolder, SpanMode.shallow)
+		.filter!(f => f.name.endsWith(".png"))
+		.map!(f => f.name)).sort!(nameCompare);
+
 	
 	BlockForm[] forms;
 	
@@ -167,7 +185,7 @@ int main(string[] args)
 	int index = 2;
 	foreach (string frame; dropOne(inputFrames))
 	{
-		writeln("Generating frame ", index);
+		writeln("Generating frame ", index, " from ", frame);
 		IFImage im = read_image(frame, ColFmt.RGBA);
 		generateBlockFormsFromImage(im, 40, 25, forms);
 		formsToGrads();
