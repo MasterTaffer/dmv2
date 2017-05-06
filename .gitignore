@@ -1,0 +1,9 @@
+*.dmv2
+dmv2
+.dub
+docs.json
+__dummy.html
+*.swp
+*.o
+*.obj
+__test__*__

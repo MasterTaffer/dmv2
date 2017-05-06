@@ -1,0 +1,15 @@
+{
+	"name": "dmv2",
+	"authors": [
+		"MasterTaffer"
+	],
+	"description": "DMV2 decoder/encoder",
+	"copyright": "Copyright © 2017, MasterTaffer",
+	"license": "proprietary",
+	"dependencies":
+	{
+		"imageformats": "~>6.1.0"
+	}
+	
+	
+}
