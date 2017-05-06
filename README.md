@@ -9,6 +9,8 @@ The DMV2 format encodes the images with a grid of "gradient blocks". These block
 
 While the algorithm is not the most sophisticated and surely better algorithms exist, it serves its (weirdly specific) purpose. DMV2 was made with decoding speed and simplicity in mind.
 
+An epilepsy inducing demonstration may be viewed [here.](https://www.youtube.com/watch?v=wC2hwEWZobo)
+
 ## Compiling
 
 Compile with [DUB](https://code.dlang.org/getting_started). Uses the [imageformats](https://code.dlang.org/packages/imageformats) package for image manipulation. 
